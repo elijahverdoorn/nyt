@@ -41,26 +41,11 @@ class DetailFragment(val story: Story): Fragment() {
 
         view.findViewById<Button>(R.id.shareButton).apply {
             setOnClickListener {
-                val intent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, story.url)
-                    type = "text/plain"
-                }
-
-                val shareIntent = Intent.createChooser(intent, "Share this Article")
-                startActivity(shareIntent)
+                startActivity(viewModel.buildShareIntent(story))
             }
         }
 
         return view
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

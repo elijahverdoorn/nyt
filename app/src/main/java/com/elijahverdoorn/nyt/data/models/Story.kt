@@ -8,5 +8,7 @@ data class Story(
     val section: String,
     val subsection: String,
     val abstract: String,
-    val byline: String
+    val byline: String,
+    val url: String,
+    val multimedia: List<Multimedia>
 )

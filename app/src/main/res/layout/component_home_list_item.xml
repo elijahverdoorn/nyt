@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/articleThumbnail"
+        android:id="@+id/articleThumbnailImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@+id/articleLinkTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/articleThumbnail" />
+        app:layout_constraintStart_toEndOf="@+id/articleThumbnailImageView" />
 
     <TextView
         android:id="@+id/articleLinkTextView"
@@ -36,6 +36,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/articleThumbnail" />
+        app:layout_constraintStart_toEndOf="@+id/articleThumbnailImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

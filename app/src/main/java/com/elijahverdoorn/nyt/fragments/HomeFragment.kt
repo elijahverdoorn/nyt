@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.elijahverdoorn.nyt.R
 import com.elijahverdoorn.nyt.adapters.StoryListAdapter
+import com.elijahverdoorn.nyt.data.models.Story
+import com.elijahverdoorn.nyt.util.StoryItemClickListener
 import com.elijahverdoorn.nyt.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.view.*
@@ -29,7 +31,11 @@ class HomeFragment: Fragment() {
         viewModel.stories.observe(this, Observer {
             view.findViewById<RecyclerView>(R.id.storyListRecyclerView).apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = StoryListAdapter(context!!, it)
+                adapter = StoryListAdapter(context!!, it, object: StoryItemClickListener {
+                    override fun navigateToStory(story: Story) {
+                        viewModel.navigateToDetail(activity, story)
+                    }
+                })
             }
         })
         return view

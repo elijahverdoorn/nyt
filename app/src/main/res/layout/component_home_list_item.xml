@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
+        android:ellipsize="end"
         android:text="@string/article_title_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/articleLinkTextView"
         app:layout_constraintEnd_toEndOf="parent"

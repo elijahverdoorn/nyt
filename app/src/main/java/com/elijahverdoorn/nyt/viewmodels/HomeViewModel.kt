@@ -25,4 +25,8 @@ class HomeViewModel(
     fun searchStories(query: String) {
         storyRepository.searchStories(query)
     }
+
+    fun showAllStories() {
+        storyRepository.searchStories("")
+    }
 }

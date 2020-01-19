@@ -1,9 +1,8 @@
 package com.elijahverdoorn.nyt.activities
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.elijahverdoorn.nyt.R
@@ -29,23 +28,41 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
 
-        // Associate searchable configuration with the SearchView
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.let {
-                        viewModel.searchStories(it)
-                    }
-                    return true
-                }
+        // Handle user interaction on search bar
+        menu.findItem(R.id.search).let {
+            it.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem?) = true
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    newText?.let {
-                        viewModel.searchStories(it)
-                    }
+                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    viewModel.showAllStories()
                     return true
                 }
             })
+            (it.actionView as SearchView).apply {
+                setOnCloseListener(object : SearchView.OnCloseListener {
+                    override fun onClose(): Boolean {
+                        viewModel.showAllStories()
+                        return false
+                    }
+                })
+
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query?.let {
+                            viewModel.searchStories(it)
+                        }
+
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        newText?.let {
+                            viewModel.searchStories(it)
+                        }
+                        return true
+                    }
+                })
+            }
         }
         return true
     }

@@ -19,8 +19,8 @@ class StoryRepository(
 
         val data = MutableLiveData<List<Story>>()
         localStorySource.stories = data
-        data.value = remoteStoryService.fetchStories().results
-        Log.d("ASDF", "ASDF")
+        val apiResponse = remoteStoryService.fetchStories()
+        data.value = apiResponse.results
 
         emitSource(data)
     }

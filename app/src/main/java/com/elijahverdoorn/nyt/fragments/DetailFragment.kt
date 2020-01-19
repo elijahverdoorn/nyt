@@ -27,7 +27,7 @@ class DetailFragment(val story: Story): Fragment() {
         val view = inflater.inflate(R.layout.detail_fragment, container, false)
 
         Glide.with(context!!)
-            .load(story.multimedia.first().url)
+            .load(story.multimedia?.first()?.url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view.findViewById<ImageView>(R.id.articleImageView))
 

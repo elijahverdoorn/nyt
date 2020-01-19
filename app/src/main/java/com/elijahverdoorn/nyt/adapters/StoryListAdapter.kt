@@ -37,7 +37,7 @@ class StoryListAdapter(val context: Context, val stories: List<Story>, val click
         holder.storyTitleTextView.text = stories[position].title
         holder.storyLinkTextView.text = stories[position].url
         Glide.with(context)
-            .load(stories[position].multimedia.first().url)
+            .load(stories[position].multimedia?.first()?.url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.storyThumbnailImageView)
 

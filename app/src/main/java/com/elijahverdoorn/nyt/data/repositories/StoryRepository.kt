@@ -2,7 +2,6 @@ package com.elijahverdoorn.nyt.data.repositories
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
 import com.elijahverdoorn.nyt.data.models.Story
 import com.elijahverdoorn.nyt.data.sources.LocalStorySource
 import com.elijahverdoorn.nyt.data.sources.RemoteStoryService

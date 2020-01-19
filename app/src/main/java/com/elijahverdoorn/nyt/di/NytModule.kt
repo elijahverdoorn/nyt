@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val nytModule = module {
     factory { RemoteStoryServiceFactory().create() }
     factory { LocalStorySource() }
-    factory { StoryRepository(get(), get()) }
+    single { StoryRepository(get(), get()) }
 }
 
 val vmModule = module {

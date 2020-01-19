@@ -15,14 +15,14 @@ class StoryRepository(
         val cachedData = localStorySource.stories
         if (cachedData != null) {
             emitSource(cachedData)
+        } else {
+            val data = MutableLiveData<List<Story>>()
+            localStorySource.stories = data
+            val apiResponse = remoteStoryService.fetchStories()
+            data.value = apiResponse.results
+
+            emitSource(data)
         }
-
-        val data = MutableLiveData<List<Story>>()
-        localStorySource.stories = data
-        val apiResponse = remoteStoryService.fetchStories()
-        data.value = apiResponse.results
-
-        emitSource(data)
     }
 
 }

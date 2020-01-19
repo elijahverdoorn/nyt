@@ -8,7 +8,7 @@ import com.elijahverdoorn.nyt.data.repositories.StoryRepository
 import com.elijahverdoorn.nyt.fragments.DetailFragment
 
 class HomeViewModel(
-    storyRepository: StoryRepository
+    val storyRepository: StoryRepository
 ): ViewModel() {
     var stories = storyRepository.getStories()
 
@@ -20,5 +20,9 @@ class HomeViewModel(
             ?.replace(R.id.main_container, DetailFragment(story), DetailFragment.TAG)
             ?.addToBackStack(null)
             ?.commit()
+    }
+
+    fun searchStories(query: String) {
+        storyRepository.searchStories(query)
     }
 }

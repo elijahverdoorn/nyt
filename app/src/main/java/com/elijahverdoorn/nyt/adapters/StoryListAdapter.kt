@@ -35,7 +35,7 @@ class StoryListAdapter(val context: Context, val stories: List<Story>, val click
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
         holder.storyTitleTextView.text = stories[position].title
-        holder.storyLinkTextView.text = stories[position].url
+        holder.storyLinkTextView.text = stories[position].short_url?:stories[position].url
         Glide.with(context)
             .load(stories[position].multimedia?.first()?.url)
             .transition(DrawableTransitionOptions.withCrossFade())

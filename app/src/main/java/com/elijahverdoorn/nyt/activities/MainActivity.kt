@@ -39,7 +39,12 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
 
-                override fun onQueryTextChange(newText: String?) = false
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let {
+                        viewModel.searchStories(it)
+                    }
+                    return true
+                }
             })
         }
         return true

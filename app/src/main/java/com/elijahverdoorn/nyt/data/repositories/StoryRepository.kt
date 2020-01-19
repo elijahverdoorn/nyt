@@ -18,19 +18,22 @@ class StoryRepository(
         if (cachedData != null) {
             emitSource(cachedData)
         } else {
-            val data = MutableLiveData<List<Story>>()
-            localStorySource.stories = data
-            liveData = data
-            val apiResponse = remoteStoryService.fetchStories()
-            data.value = apiResponse.results
-
-            emitSource(data)
+            remoteStoryService.fetchStories().results.let { stories ->
+                MutableLiveData<List<Story>>().let {
+                    localStorySource.stories = it
+                    liveData = it
+                    it.value = stories
+                    emitSource(it)
+                }
+                localStorySource.allStories = stories
+            }
         }
     }
 
     fun searchStories(query: String) {
-        liveData.value = liveData.value?.filter {
-            it.title.contains(query)
+        val completeData = localStorySource.allStories
+        liveData.value = completeData?.filter {
+            it.title.toLowerCase().contains(query.toLowerCase())
         }
     }
 }

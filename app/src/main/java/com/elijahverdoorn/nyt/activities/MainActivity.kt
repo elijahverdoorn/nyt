@@ -1,9 +1,6 @@
 package com.elijahverdoorn.nyt.activities
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.elijahverdoorn.nyt.R
 import com.elijahverdoorn.nyt.fragments.HomeFragment

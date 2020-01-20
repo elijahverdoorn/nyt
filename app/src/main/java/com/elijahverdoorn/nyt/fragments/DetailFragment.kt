@@ -1,7 +1,5 @@
 package com.elijahverdoorn.nyt.fragments
 
-import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -24,7 +22,6 @@ class DetailFragment(val story: Story): Fragment() {
             setDisplayHomeAsUpEnabled(true)
             setHasOptionsMenu(true)
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -35,7 +32,6 @@ class DetailFragment(val story: Story): Fragment() {
 
         return true
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

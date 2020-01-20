@@ -15,7 +15,7 @@ object RetrofitService {
     fun <S> create(clazz: Class<S>, url: String) =
         Retrofit.Builder()
             .baseUrl(url)
-            .addConverterFactory(Json.nonstrict.asConverterFactory(MEDIA_TYPE_JSON.toMediaType()))
+            .addConverterFactory(Json.nonstrict.asConverterFactory(MEDIA_TYPE_JSON.toMediaType())) // Nonstrict so we don't have to create complete models
             .client(client)
             .build()
             .create(clazz)

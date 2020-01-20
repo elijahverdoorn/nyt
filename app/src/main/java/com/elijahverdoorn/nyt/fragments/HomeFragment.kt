@@ -1,9 +1,9 @@
 package com.elijahverdoorn.nyt.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,6 +21,11 @@ class HomeFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setHasOptionsMenu(true)
+        }
     }
 
     override fun onCreateView(
@@ -44,6 +49,48 @@ class HomeFragment: Fragment() {
             }
         })
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.options_menu, menu)
+
+        // Handle user interaction on search bar
+        menu?.findItem(R.id.search).let {
+
+            it?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem?) = true
+
+                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    viewModel.showAllStories()
+                    return true
+                }
+            })
+            (it?.actionView as SearchView).apply {
+                setOnCloseListener(object : SearchView.OnCloseListener {
+                    override fun onClose(): Boolean {
+                        viewModel.showAllStories()
+                        return false
+                    }
+                })
+
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query?.let {
+                            viewModel.searchStories(it)
+                        }
+
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        newText?.let {
+                            viewModel.searchStories(it)
+                        }
+                        return true
+                    }
+                })
+            }
+        }
     }
 
     companion object {

@@ -5,6 +5,7 @@ import android.media.Image
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -18,13 +19,31 @@ class DetailFragment(val story: Story): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(false)
+
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHasOptionsMenu(true)
+        }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            android.R.id.home -> viewModel.back(this)
+            else -> return false
+        }
 
-        inflater?.inflate(R.menu.empty_option_menu, menu)
+        return true
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(false)
+            setHasOptionsMenu(true)
+        }
     }
 
     override fun onCreateView(

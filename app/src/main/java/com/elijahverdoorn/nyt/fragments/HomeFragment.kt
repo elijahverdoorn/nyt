@@ -38,7 +38,7 @@ class HomeFragment: Fragment() {
 
         viewModel.stories.observe(this, Observer {
             view.findViewById<RecyclerView>(R.id.storyListRecyclerView)?.apply {
-                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL)) // Lines between elements of RV
 
                 layoutManager = LinearLayoutManager(context)
                 adapter = StoryListAdapter(context!!, it, object: StoryItemClickListener {
@@ -60,6 +60,7 @@ class HomeFragment: Fragment() {
                 override fun onMenuItemActionExpand(item: MenuItem?) = true
 
                 override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    // When user closes search we want to go back to showing all stories
                     viewModel.showAllStories()
                     return true
                 }
@@ -67,6 +68,7 @@ class HomeFragment: Fragment() {
             (it?.actionView as SearchView).apply {
                 setOnCloseListener(object : SearchView.OnCloseListener {
                     override fun onClose(): Boolean {
+                        // When user closes search we want to go back to showing all stories
                         viewModel.showAllStories()
                         return false
                     }

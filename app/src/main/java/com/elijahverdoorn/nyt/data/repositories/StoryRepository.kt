@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import com.elijahverdoorn.nyt.data.models.Story
 import com.elijahverdoorn.nyt.data.sources.LocalStorySource
 import com.elijahverdoorn.nyt.data.sources.RemoteStoryService
+import java.util.*
 
 class StoryRepository(
     val localStorySource: LocalStorySource,
@@ -31,7 +32,7 @@ class StoryRepository(
 
     fun searchStories(query: String) {
         liveData.value = localStorySource.allStories?.filter {
-            it.title.toLowerCase().contains(query.toLowerCase())
+            it.title.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))
         }
     }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.elijahverdoorn.nyt.data.models.Story
 
 class DetailViewModel: ViewModel() {
-
+    // Navigate up the fragment back stack
     fun back(fragment: Fragment) {
         fragment.fragmentManager?.popBackStack()
     }

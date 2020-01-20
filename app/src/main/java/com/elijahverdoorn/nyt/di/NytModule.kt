@@ -2,7 +2,6 @@ package com.elijahverdoorn.nyt.di
 
 import com.elijahverdoorn.nyt.data.repositories.StoryRepository
 import com.elijahverdoorn.nyt.data.sources.LocalStorySource
-import com.elijahverdoorn.nyt.data.sources.RemoteStoryService
 import com.elijahverdoorn.nyt.data.sources.RemoteStoryServiceFactory
 import com.elijahverdoorn.nyt.viewmodels.DetailViewModel
 import com.elijahverdoorn.nyt.viewmodels.HomeViewModel

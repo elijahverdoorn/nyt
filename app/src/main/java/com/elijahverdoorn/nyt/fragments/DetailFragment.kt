@@ -19,15 +19,15 @@ class DetailFragment(val story: Story): Fragment() {
         super.onCreate(savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHasOptionsMenu(true)
+            setDisplayHomeAsUpEnabled(true) // Enable back button
+            setHasOptionsMenu(true) // Inform activity that the fragment will handle the options menu
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            android.R.id.home -> viewModel.back(this)
-            else -> return false
+            android.R.id.home -> viewModel.back(this) // User hit on-screen back button
+            else -> return false // Allow system to handle all other actions
         }
 
         return true

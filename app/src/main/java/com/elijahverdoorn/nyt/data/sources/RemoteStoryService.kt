@@ -1,7 +1,6 @@
 package com.elijahverdoorn.nyt.data.sources
 
 import com.elijahverdoorn.nyt.data.models.ApiResponse
-import com.elijahverdoorn.nyt.data.models.Story
 import retrofit2.http.GET
 
 interface RemoteStoryService {

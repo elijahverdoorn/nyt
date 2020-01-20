@@ -7,4 +7,6 @@
     <string name="title">Title</string>
     <string name="article_description">Article Description</string>
     <string name="share_button">Share Button</string>
+    <string name="the_new_york_times">The New York Times</string>
+    <string name="search">Search</string>
 </resources>

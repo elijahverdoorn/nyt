@@ -17,54 +17,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.main_container, HomeFragment(), HomeFragment.TAG)
                 .commit()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.options_menu, menu)
-
-        // Handle user interaction on search bar
-        menu.findItem(R.id.search).let {
-            it.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-                override fun onMenuItemActionExpand(item: MenuItem?) = true
-
-                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                    viewModel.showAllStories()
-                    return true
-                }
-            })
-            (it.actionView as SearchView).apply {
-                setOnCloseListener(object : SearchView.OnCloseListener {
-                    override fun onClose(): Boolean {
-                        viewModel.showAllStories()
-                        return false
-                    }
-                })
-
-                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        query?.let {
-                            viewModel.searchStories(it)
-                        }
-
-                        return true
-                    }
-
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        newText?.let {
-                            viewModel.searchStories(it)
-                        }
-                        return true
-                    }
-                })
-            }
-        }
-        return true
     }
 }
 

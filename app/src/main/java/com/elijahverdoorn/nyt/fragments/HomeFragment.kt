@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.elijahverdoorn.nyt.R
@@ -32,6 +33,8 @@ class HomeFragment: Fragment() {
 
         viewModel.stories.observe(this, Observer {
             view.findViewById<RecyclerView>(R.id.storyListRecyclerView)?.apply {
+                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
                 layoutManager = LinearLayoutManager(context)
                 adapter = StoryListAdapter(context!!, it, object: StoryItemClickListener {
                     override fun navigateToStory(story: Story) {

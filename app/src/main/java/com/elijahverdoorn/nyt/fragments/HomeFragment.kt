@@ -56,7 +56,6 @@ class HomeFragment: Fragment() {
 
         // Handle user interaction on search bar
         menu?.findItem(R.id.search).let {
-
             it?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
                 override fun onMenuItemActionExpand(item: MenuItem?) = true
 
